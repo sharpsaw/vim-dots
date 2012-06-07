@@ -1,0 +1,16 @@
+#!/bin/zsh
+bindkey -v # vi keys
+
+# The "vi-{up,down}-*"s start at the beginning of the line, but these don't:
+bindkey "^P" up-line-or-history
+bindkey "^[OA" up-line-or-history # Up arrow
+bindkey "^[[A" up-line-or-history # Another Up arrow
+bindkey "^N" down-line-or-history
+bindkey "^[OB" down-line-or-history # Down arrow
+bindkey "^[[B" down-line-or-history # Another Down arrow
+
+autoload edit-command-line; zle -N edit-command-line
+
+bindkey -M vicmd v edit-command-line
+
+bindkey "^[." insert-last-word # Alt+'.' gives !$'s value.
