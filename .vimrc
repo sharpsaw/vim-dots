@@ -27,6 +27,7 @@ fun! SetupVAM()
         \ 'gitv',
         \ 'github:Raimondi/vim-transpose-words',
         \ 'github:kien/ctrlp.vim',
+        \ 'github:kchmck/vim-coffee-script',
         \ ]
   " TODO:
   " let want += [ 'vim-addon-rdebug' ]
