@@ -10,7 +10,9 @@ Makes zsh be vi-keys, with a few spiffups.
 Context
 -------
 
-Why "-dots"?  See: http://github.com/ouicode/rkingy-dots-conf
+Why "-dots"?  See the system I start with:
+
+  curl sharpsaw.org/init | sh
 
 A Cool thing
 ------------
