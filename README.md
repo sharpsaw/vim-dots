@@ -25,3 +25,10 @@ Vim
 ---
 
 And much vigor.
+
+Contact
+-------
+
+rking-vim-dots@sharpsaw.org
+
+Ask/tell/demand anything. I'll be receptive.
