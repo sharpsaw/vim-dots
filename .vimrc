@@ -20,6 +20,8 @@ fun! SetupVAM()
   call EnsureVamIsOnDisk(vam_install_path)
   exec 'set runtimepath+='.vam_install_path.'/vim-addon-manager'
 
+  " I think this would be better as a conf file called ~/.vim/pathogen.conf
+  " --Ingy
   let want = [
         \ 'ack',
         \ 'bad-whitespace',
