@@ -1,6 +1,6 @@
 set editing-mode vi
 
-# Nothing below is really working (yet)
+set bind-tty-special-chars off
 
 # man bash | less -p beginning-of-line
 
@@ -9,13 +9,17 @@ set editing-mode vi
 # docs on the `bind` builtin command:
 # http://theory.uwinnipeg.ca/localfiles/infofiles/bash/bashref_55.html
 $if mode=vi-insert
-    bind "\C-a": beginning-of-line
-    bind "\C-e": end-of-line
-
     #      ↓ Thanks for this, cirᴡɪɴ!
-    bind "\e_": insert-last-argument
+    "\e_": insert-last-argument
 
     # TODO: Dump all of emacs mode and re-use any that do not conflict with
     # vi-insert mode
     # ...
 $endif
+
+"\C-a": beginning-of-line
+"\C-e": end-of-line
+
+# More like vim's default iskeyword's
+"\C-w": backward-kill-word
+
