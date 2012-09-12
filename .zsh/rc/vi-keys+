@@ -11,6 +11,11 @@ bindkey -M vicmd v edit-command-line
 
 # These come from emacs mode. Anything that doesn't conflict gets to stay.
 # Note: remember that ^[x means Alt+x, usually.
+# The following is to make it faster than the default of 40 (== 0.4s), which is
+# easy to beat for keys that you type well (meaning that if it wasn't
+# shortened, zsh would see your <Esc>,b as Alt+b, leaving you in Insert Mode
+# afterward.
+export KEYTIMEOUT=10
 
 #MARKTODO# bindkey "^@" set-mark-command
 bindkey "^A" beginning-of-line
@@ -20,7 +25,7 @@ bindkey "^E" end-of-line
 bindkey "^F" forward-char
 bindkey "^G" send-break
 bindkey "^H" backward-delete-char
-#already-there# bindkey "^I" expand-or-complete
+bindkey "^I" expand-or-complete
 #already-there# bindkey "^J" accept-line
 bindkey "^K" kill-line
 #already-there# bindkey "^L" clear-screen
@@ -35,7 +40,7 @@ bindkey "^Q" push-line # TODO: figure this out
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 bindkey "^T" transpose-chars
-#x#bindkey "^U" kill-whole-line # vi-kill-line is gentler. Which == better?
+#x#bindkey "^U" kill-whole-line # vi-kill-line is gentler. Which is better?
 #already-there#bindkey "^V" quoted-insert # (as vi-quoted-insert)
 #already-there#bindkey "^W" backward-kill-word # (as vi-backward-kill-word)
 bindkey "^X^B" vi-match-bracket # vi: Esc %
@@ -83,19 +88,23 @@ bindkey "^[." insert-last-word # Alt+'.' gives !$'s value.
 #…?# bindkey "^[>" end-of-buffer-or-history
 #x# bindkey "^[?" which-command
 #x# bindkey "^[A" accept-and-hold
-#x# bindkey "^[B" backward-word
+#XXX darn, this conflicts#bindkey "^[B" backward-word
 #xx# #x# bindkey "^[C" capitalize-word
-#x# bindkey "^[D" kill-word
-#x# bindkey "^[F" forward-word
-#x# bindkey "^[G" get-line
-#x# bindkey "^[H" run-help
-#xx# #x# bindkey "^[L" down-case-word
-#x# bindkey "^[N" history-search-forward
+#XXX darn, this conflicts#bindkey "^[D" kill-word
+#XXX darn, this conflicts#bindkey "^[F" forward-word
+#MARKTODO# bindkey "^[G" get-line # "Pop the top line off the buffer stack and
+                                  # insert it at the cursor position."
+bindkey "^[H" run-help # "Push the buffer onto the buffer stack, and
+                       # execute the command ‘run-help cmd’, where cmd is the
+                       # current command. run-help is normally aliased to man.
+                       # [Requires actual Alt+Shift+h]
+#x# bindkey "^[L" down-case-word
+bindkey "^[N" history-search-forward
 bindkey "^[OA" up-line-or-history
 bindkey "^[OB" down-line-or-history
-#x# bindkey "^[OC" forward-char
-#x# bindkey "^[OD" backward-char
-#x# bindkey "^[P" history-search-backward
+#already-there# bindkey "^[OC" forward-char
+#already-there# bindkey "^[OD" backward-char
+bindkey "^[P" history-search-backward
 #x# bindkey "^[Q" push-line
 #x# bindkey "^[S" spell-word
 #xx# bindkey "^[T" transpose-words
@@ -107,24 +116,24 @@ bindkey "^[[C" forward-char
 bindkey "^[[D" backward-char
 bindkey "^[_" insert-last-word
 #?# bindkey "^[a" accept-and-hold
-#?# bindkey "^[b" backward-word
+#XXX darn, this conflicts#bindkey "^[b" backward-word
 #?# bindkey "^[c" capitalize-word
-#?# bindkey "^[d" kill-word
-#?# bindkey "^[f" forward-word
+#XXX darn, this conflicts#bindkey "^[d" kill-word
+#XXX darn, this conflicts#bindkey "^[f" forward-word
 #?# bindkey "^[g" get-line
-#?# bindkey "^[h" run-help
+#conflicts with Esc h#bindkey "^[h" run-help # see above
 #?# bindkey "^[l" down-case-word
-#?# bindkey "^[n" history-search-forward
-#?# bindkey "^[p" history-search-backward
+bindkey "^[n" history-search-forward
+bindkey "^[p" history-search-backward
 #?# bindkey "^[q" push-line
 #?# bindkey "^[s" spell-word
 #?# bindkey "^[t" transpose-words
 #?# bindkey "^[u" up-case-word
-#?# bindkey "^[w" copy-region-as-kill
+#MARKTODO# bindkey "^[w" copy-region-as-kill
 #?# bindkey "^[x" execute-named-cmd
-#?# bindkey "^[y" yank-pop
+#MARKTODO# bindkey "^[y" yank-pop
 #?# bindkey "^[z" execute-last-named-cmd
 #?# bindkey "^[|" vi-goto-column
 #?# bindkey "^[^?" backward-kill-word
 #?# bindkey "^_" undo
-#?# bindkey "^?" backward-delete-char
+bindkey "^?" backward-delete-char
