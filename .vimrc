@@ -20,11 +20,27 @@ fun! SetupVAM()
   call EnsureVamIsOnDisk(vam_install_path)
   exec 'set runtimepath+='.vam_install_path.'/vim-addon-manager'
 
+  " The textobjs here provide extra motions/nouns, e.g. vae selects the entire
+  " buffer, da/ deletes to the last pattern, etc. If you play with it as "v__"
+  " you'll see what each does, or else :h textobj<tab>
+  " textobj-indent - ai ii aI iI
+  " textobj-lastpat - a/ a? …
+  " textobj-diff - adh adf …
+  " textobj-entire - ae …
+  " kana/vim-textobj-underscore - i_ a_
+  " TODO: http://webtech-walker.com/archive/2009/11/05223206.html
+  " …plus more in the various foo-dots
   let want = [
         \ 'ack',
         \ 'bad-whitespace',
         \ 'endwise',
         \ 'gitv',
+        \ 'textobj-user',
+        \ 'textobj-indent',
+        \ 'textobj-lastpat',
+        \ 'textobj-diff',
+        \ 'textobj-entire',
+        \ 'github:kana/vim-textobj-underscore',
         \ 'github:Raimondi/vim-transpose-words',
         \ 'github:kien/ctrlp.vim',
         \ ]
