@@ -8,6 +8,7 @@ set backspace=indent,eol,start hlsearch notimeout clipboard=
 set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.class wildmode=list:longest,full
 set encoding=utf-8 termencoding=utf-8 " digraph keymap=greek iminsert=0
 set modeline
+set hidden " This one "Should be default", —#vim
 set notitle " was messing up wmctrl's ability to pick out a window.
 
 filetype plugin indent on
