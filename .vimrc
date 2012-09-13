@@ -42,6 +42,8 @@ fun! SetupVAM()
         \ 'textobj-entire',
         \ 'github:kana/vim-textobj-underscore',
         \ 'github:Raimondi/vim-transpose-words',
+        \ 'github:dahu/vimple',
+        \ 'github:Raimondi/vim-buffalo',
         \ 'github:kien/ctrlp.vim',
         \ ]
   " TODO:
