@@ -45,6 +45,7 @@ fun! SetupVAM()
         \ 'github:dahu/vimple',
         \ 'github:Raimondi/vim-buffalo',
         \ 'github:kien/ctrlp.vim',
+        \ 'github:kchmck/vim-coffee-script',
         \ ]
   " TODO:
   " let want += [ 'vim-addon-rdebug' ]
