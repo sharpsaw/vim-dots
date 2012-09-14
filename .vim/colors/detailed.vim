@@ -10,6 +10,8 @@
 "   - Distinguish between, e.g.: class Foo < Bar, which is:
 "     ['rubyBlock','rubyClassDeclaration', 'rubyConstant'] and
 "     ['rubyBlock', 'rubyConstant']'
+"     "osse │ rking: maybe make a new syntax rule where you fiddle with the
+"       'contains' argument to :syn"
 "
 " A companion idea, but for indentation:
 " https://github.com/nathanaelkane/vim-indent-guides
