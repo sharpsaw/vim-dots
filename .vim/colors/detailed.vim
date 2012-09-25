@@ -557,7 +557,7 @@ hi link rubyFunction    Function
 hi link rubyControl     Statement
 hi link rubyKeyword     Keyword
 hi link rubyBeginEnd    Statement
-call s:fg('rubyDefine', 'purple9', 'bold')
+call s:fg('rubyDefine', 'purple9')
 call s:fg('rubyClass', 'purple13', 'bold')
 call s:fg('rubyModule', 'purple13')
 " hi rubyMethodBlock cleared
