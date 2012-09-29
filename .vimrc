@@ -11,14 +11,11 @@ fun! EnsureVamIsOnDisk(vam_install_path)
 endf
 
 fun! SetupVAM()
-  " Set advanced options like this:
-  " let g:vim_addon_manager = {}
-  " let g:vim_addon_manager['key'] = value
-  " Hrm: ^ what is available?
-
   let vam_install_path = expand('$HOME') . '/.vim/vim-addons'
   call EnsureVamIsOnDisk(vam_install_path)
   exec 'set runtimepath+='.vam_install_path.'/vim-addon-manager'
+
+  "README
 
   " The textobjs here provide extra motions/nouns, e.g. vae selects the entire
   " buffer, da/ deletes to the last pattern, etc. If you play with it as "v__"
@@ -30,10 +27,39 @@ fun! SetupVAM()
   " kana/vim-textobj-underscore - i_ a_
   " TODO: http://webtech-walker.com/archive/2009/11/05223206.html
   " …plus more in the various foo-dots
+
+  " ack provides :Ack
+
+  " bad-whitespace highlights end-of-line whitespace
+  "   :EraseBadWhitespace to kill it
+  "   :HideBadWhitespace to ignore it
+
+  " endwise closes tokens, like in Ruby "def foo<cr>" throws the "end" in
+  "   Bypass with ^V{
+  "   sharpsaw/perl-dots disables for Perl, because it isn't optimized there
+
+  " gitv - Like gitk but for vim
+  "   :Gitv - Lots of cool functionality.  :h gitv
+  "   Plus all the fugitive stuff: :h fugitive
+
+  " recover - Smarten up the recovery process with diff mode
+  "   :FinishRecovery when done
+  "   Or "a"bort to get back to the old menu
+
+  " vim-buffalo is for \l, to hop between buffers quickly
+  "   (vimple is a support lib for buffalo)
+
+  " CtrlP.vim is an amazing plugin for fuzzyfinding. Hit ^P in normal mode.
+
+  " vim-coffee-script doesn't really belong here, but :h :CoffeeCompile
+
+  "end README snip
+
   let want = [
         \ 'ack',
         \ 'bad-whitespace',
         \ 'endwise',
+        \ 'recover',
         \ 'gitv',
         \ 'textobj-user',
         \ 'textobj-indent',
@@ -47,10 +73,6 @@ fun! SetupVAM()
         \ 'github:kien/ctrlp.vim',
         \ 'github:kchmck/vim-coffee-script',
         \ ]
-  " TODO:
-  " let want += [ 'vim-addon-rdebug' ]
-  " let want += [ 'vim-ruby-debugger' ]
-  " let want += [ 'github:MarcWeber/vim-addon-ruby-debug-ide' ]
   call vam#ActivateAddons(want, {'auto_install' : 1})
 
   " How to find addon names?
