@@ -1,0 +1,6 @@
+# Delete all characters between a pair of characters and then go to insert mode.
+# Mimics Vim's "ci" text object functionality.
+zle delete-in
+zle vi-insert
+# (From https://github.com/paradigm/dotfiles/blob/master/.zshrc)
+# vim:ft=zsh

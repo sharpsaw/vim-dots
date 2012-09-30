@@ -1,139 +1,144 @@
-#!/bin/zsh
-bindkey -v # vi keys
+# Keys from emacs mode. Anything that doesn't conflict gets to stay.
+
+bindkey -v # start with vi keys
 
 autoload edit-command-line; zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-# Docs for these widgets are kind of here:
-# http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
-# Some details are here:
-# https://github.com/zsh-users/zsh/tree/master/Functions/Zle
-
-# These come from emacs mode. Anything that doesn't conflict gets to stay.
-# Note: remember that ^[x means Alt+x, usually.
-# The following is to make it faster than the default of 40 (== 0.4s), which is
-# easy to beat for keys that you type well (meaning that if it wasn't
-# shortened, zsh would see your <Esc>,b as Alt+b, leaving you in Insert Mode
-# afterward.
-export KEYTIMEOUT=10
-
-#MARKTODO# bindkey "^@" set-mark-command
+# The classics of emacs bindings:
 bindkey "^A" beginning-of-line
 bindkey "^B" backward-char
-bindkey "^D" delete-char-or-list # if at end, show (but don't expand) expansions
+bindkey "^D" delete-char-or-list
 bindkey "^E" end-of-line
 bindkey "^F" forward-char
 bindkey "^G" send-break
 bindkey "^H" backward-delete-char
 bindkey "^I" expand-or-complete
-#already-there# bindkey "^J" accept-line
 bindkey "^K" kill-line
-#already-there# bindkey "^L" clear-screen
-#already-there# bindkey "^M" accept-line
 bindkey "^N" down-line-or-history
 bindkey "^O" accept-line-and-down-history # I wonder what this is for.
 bindkey "^P" up-line-or-history
-# "Push the current buffer onto the buffer stack and clear the buffer. Next
-# time the editor starts up, the buffer will be popped off the top of the
-# buffer stack and loaded into the editing buffer."
-bindkey "^Q" push-line # TODO: figure this out
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 bindkey "^T" transpose-chars
-#x#bindkey "^U" kill-whole-line # vi-kill-line is gentler. Which is better?
-#already-there#bindkey "^V" quoted-insert # (as vi-quoted-insert)
-#already-there#bindkey "^W" backward-kill-word # (as vi-backward-kill-word)
-bindkey "^X^B" vi-match-bracket # vi: Esc %
-bindkey "^X^F" vi-find-next-char # vi: Esc f
+
+# And now, for some exciting ones, if you've only used vi keys…
+    bindkey "^[." insert-last-word # Alt+'.' gives !$'s value.
+    bindkey "^[?" which-command # Shows "which" output for the current command
+    bindkey "^[H" run-help # run "man" on current command (Alt+Shift+h)
+    bindkey -M vicmd "^[H" run-help
+
+    # Cut the contents of the line then paste when the next prompt appears.
+    #  (kind of like backgrounding the current command line for 1 command)
+    bindkey "^Q" push-line
+    bindkey "^[Q" push-line
+    bindkey "^[q" push-line
+    bindkey -M vicmd "^[q" push-line
+
+    bindkey "^['" quote-line # Very useful. E.g. to echo a command into a file.
+    bindkey -M vicmd "^['" quote-line
+
+    # Searches history for the current command, then puts the line *after that*
+    # into the edit buffer. Funky but interesting.
+    bindkey "^X^N" infer-next-history
+
+    # Kinda like vim's ^O — one-shot vi cmd
+    bindkey "^X^V" vi-cmd-mode
+
+    # Run through line (or arg, depending on context) history
+    bindkey "^[N" history-search-forward
+    bindkey "^[n" history-search-forward
+    bindkey "^[P" history-search-backward
+    bindkey "^[p" history-search-backward
+
+
+# Things that have more efficient bindings, but keeping for compatibility with
+# people used to them:
+bindkey "^X^B" vi-match-bracket # vi: %
+bindkey "^X^F" vi-find-next-char # vi: f
 bindkey "^X^J" vi-join # vi: J
-bindkey "^X^K" kill-buffer # similar to ^u^k
-# Haven't fully figured this one out. Docs say, "Search in the history list
-# for a line matching the current one and fetch the event following it.":
-bindkey "^X^N" infer-next-history # TODO: figure this out
-bindkey "^X^O" overwrite-mode # vi: Esc R
-bindkey "^X^U" undo
-bindkey "^X^V" vi-cmd-mode # Kinda like vim's ^O — one-shot vi cmd
-#MARKTODO# bindkey "^X^X" exchange-point-and-mark
-bindkey "^X*" expand-word # Why not just tab?
+bindkey "^X^K" kill-buffer # ^u^k
+bindkey "^X^O" overwrite-mode # vi: R
+bindkey "^X^U" undo # vi: u
+bindkey "^Xu" undo
 bindkey "^X=" what-cursor-position # Show char info, like vim ga + g^g
-bindkey "^XG" list-expand # Show, but don't expand, expansion.
-bindkey "^Xg" list-expand
 bindkey "^Xr" history-incremental-search-backward # Same as ^r
 bindkey "^Xs" history-incremental-search-forward # Same as ^s # For stty ixon?
-bindkey "^Xu" undo
-#MARKTODO# bindkey "^Y" yank
-bindkey "^[^D" list-choices
-bindkey "^[^G" send-break
-#?# bindkey "^[^H" backward-kill-word
-bindkey "^[^L" clear-screen
-bindkey "^[^_" copy-prev-word
-#?# bindkey "^[ " expand-history # Why not just tab? Seems like a waste.
-bindkey "^[!" expand-history # Again, why not just tab? But OK.
-#MARKTODO# bindkey "^[\"" quote-region
-#?# bindkey "^[\$" spell-word
-bindkey "^['" quote-line # Very useful. E.g. to echo a command into a file.
-bindkey "^[-" neg-argument
-bindkey "^[." insert-last-word # Alt+'.' gives !$'s value.
-#don't like 'em# bindkey "^[0" digit-argument
-#don't like 'em# bindkey "^[1" digit-argument
-#don't like 'em# bindkey "^[2" digit-argument
-#don't like 'em# bindkey "^[3" digit-argument
-#don't like 'em# bindkey "^[4" digit-argument
-#don't like 'em# bindkey "^[5" digit-argument
-#don't like 'em# bindkey "^[6" digit-argument
-#don't like 'em# bindkey "^[7" digit-argument
-#don't like 'em# bindkey "^[8" digit-argument
-#don't like 'em# bindkey "^[9" digit-argument
-#…?# bindkey "^[<" beginning-of-buffer-or-history
-#…?# bindkey "^[>" end-of-buffer-or-history
-#x# bindkey "^[?" which-command
-#x# bindkey "^[A" accept-and-hold
-#XXX darn, this conflicts#bindkey "^[B" backward-word
-#xx# #x# bindkey "^[C" capitalize-word
-#XXX darn, this conflicts#bindkey "^[D" kill-word
-#XXX darn, this conflicts#bindkey "^[F" forward-word
-#MARKTODO# bindkey "^[G" get-line # "Pop the top line off the buffer stack and
-                                  # insert it at the cursor position."
-bindkey "^[H" run-help # "Push the buffer onto the buffer stack, and
-                       # execute the command ‘run-help cmd’, where cmd is the
-                       # current command. run-help is normally aliased to man.
-                       # [Requires actual Alt+Shift+h]
-#x# bindkey "^[L" down-case-word
-bindkey "^[N" history-search-forward
-bindkey "^[OA" up-line-or-history
-bindkey "^[OB" down-line-or-history
-#already-there# bindkey "^[OC" forward-char
-#already-there# bindkey "^[OD" backward-char
-bindkey "^[P" history-search-backward
-#x# bindkey "^[Q" push-line
-#x# bindkey "^[S" spell-word
-#xx# bindkey "^[T" transpose-words
-#xx# bindkey "^[U" up-case-word
-#?# bindkey "^[W" copy-region-as-kill
-bindkey "^[[A" up-line-or-history
-bindkey "^[[B" down-line-or-history
-bindkey "^[[C" forward-char
-bindkey "^[[D" backward-char
-bindkey "^[_" insert-last-word
-#?# bindkey "^[a" accept-and-hold
-#XXX darn, this conflicts#bindkey "^[b" backward-word
-#?# bindkey "^[c" capitalize-word
-#XXX darn, this conflicts#bindkey "^[d" kill-word
-#XXX darn, this conflicts#bindkey "^[f" forward-word
-#?# bindkey "^[g" get-line
-#conflicts with Esc h#bindkey "^[h" run-help # see above
-#?# bindkey "^[l" down-case-word
-bindkey "^[n" history-search-forward
-bindkey "^[p" history-search-backward
-#?# bindkey "^[q" push-line
-#?# bindkey "^[s" spell-word
-#?# bindkey "^[t" transpose-words
-#?# bindkey "^[u" up-case-word
-#MARKTODO# bindkey "^[w" copy-region-as-kill
-#?# bindkey "^[x" execute-named-cmd
-#MARKTODO# bindkey "^[y" yank-pop
-#?# bindkey "^[z" execute-last-named-cmd
-#?# bindkey "^[|" vi-goto-column
-#?# bindkey "^[^?" backward-kill-word
-#?# bindkey "^_" undo
+bindkey "^[^H" backward-kill-word # Same as ^w.
+bindkey "^[^L" clear-screen # ^L
+bindkey "^[^G" send-break # ^G
+bindkey "^[<" beginning-of-buffer-or-history # gg
+bindkey "^[>" end-of-buffer-or-history # G
+bindkey "^[OA" up-line-or-history # ^p or vi: k
+bindkey "^[[A" up-line-or-history # (same)
+bindkey "^[OB" down-line-or-history # ^n or vi: j
+bindkey "^[[B" down-line-or-history # (same)
+bindkey "^[[C" forward-char # ^f or vi: l
+bindkey "^[[D" backward-char # ^b or vi: h
+bindkey "^[_" insert-last-word # Alt+.
+bindkey "^_" undo
 bindkey "^?" backward-delete-char
+
+# Fined grained expansion vs. completion. (Tab is generally handier)
+bindkey "^X*" expand-word # "Shell expansion of current word"
+bindkey "^[!" expand-history # "History expansion on the edit buffer"
+bindkey "^[^D" list-choices # Show, but don't complete, possible completions
+bindkey "^Xg" list-expand # Show, but don't expand, expansion. (c.f., ^d)
+bindkey "^XG" list-expand
+
+# TODO: Learn about emacs-like marks handling and enable these:
+#bindkey "^@" set-mark-command
+#bindkey "^X^X" exchange-point-and-mark
+#bindkey "^Y" yank
+#bindkey "^[\"" quote-region
+#bindkey "^[G" get-line # "Pop the top line off the buffer stack and
+#bindkey "^[w" copy-region-as-kill
+#bindkey "^[y" yank-pop
+
+# TODO: Learn these, too:
+#bindkey "^[\$" spell-word
+#bindkey "^[-" neg-argument # TODO: figure out how to use this
+#bindkey "^[^_" copy-prev-word
+
+# And now, for the bummer of the story.
+# Since that ^[x means Alt+x, zsh can't distinguish between the two.  Maybe
+# there's a way to get them to work without robbing the vi-key siblings.
+#
+# I tried KEYTIMEOUT and that was fail.  (It nixes the ability to bind "^X;"
+# (from zaw) and "di(" (from ./vim-keys)
+#bindkey "^[a" accept-and-hold
+#bindkey "^[c" capitalize-word
+#bindkey "^[g" get-line
+#bindkey "^[B" backward-word
+#bindkey "^[D" kill-word
+#bindkey "^[F" forward-word
+#bindkey "^[b" backward-word
+#bindkey "^[d" kill-word
+#bindkey "^[f" forward-word
+#bindkey "^[h" run-help
+#bindkey "^[A" accept-and-hold
+#bindkey "^[C" capitalize-word
+#bindkey "^[L" down-case-word
+#bindkey "^[S" spell-word
+#bindkey "^[T" transpose-words
+#bindkey "^[U" up-case-word
+#bindkey "^[l" down-case-word
+#bindkey "^[s" spell-word
+#bindkey "^[t" transpose-words
+#bindkey "^[u" up-case-word
+#bindkey "^[W" copy-region-as-kill
+#bindkey "^[x" execute-named-cmd
+#bindkey "^[z" execute-last-named-cmd
+#bindkey "^[|" vi-goto-column
+#bindkey "^[^?" backward-kill-word
+
+# Why not just tab? Seems like a waste of a highly useful key: Alt+Space
+#?# bindkey "^[ " expand-history
+
+#-----------------------------------------
+# Docs for these widgets are kind of here:
+# http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
+# Some details are here:
+# https://github.com/zsh-users/zsh/tree/master/Functions/Zle
+
+# vim:ft=zsh

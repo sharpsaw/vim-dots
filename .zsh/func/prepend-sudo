@@ -1,0 +1,7 @@
+if ! echo "$BUFFER" | grep -q "^sudo "
+then
+    BUFFER="sudo $BUFFER"
+    CURSOR+=5
+fi
+# (From https://github.com/paradigm/dotfiles/blob/master/.zshrc)
+# vim:ft=zsh

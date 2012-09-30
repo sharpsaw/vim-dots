@@ -1,0 +1,35 @@
+# vim-like bindings!
+#  (Huge thanks to paradigm! https://github.com/paradigm/dotfiles/ )
+
+for n in ~/.../src/vim-dots/.zsh/func/*; do
+    zle -N ${n##*/}
+done
+
+bindkey -M vicmd "ca" change-around
+bindkey -M vicmd "ci" change-in
+bindkey -M vicmd "da" delete-around
+bindkey -M vicmd "di" delete-in
+bindkey -M vicmd "g~" vi-oper-swap-case
+bindkey -M vicmd "ga" what-cursor-position
+bindkey -M vicmd "gg" beginning-of-history
+bindkey -M vicmd "G" end-of-history
+
+# Remove escape timeouts (TODO: examine the merit of this)
+# Note: This destroys normal Alt behavior. =\
+#bindkey -rpM viins '^['
+#bindkey -rpM vicmd '^['
+
+# Have i_ctrl-b work as i_ctrl-p does in Vim.
+#?# bindkey -M viins "^B" _history-complete-newer
+# Have i_ctrl-f work as i_ctrl-n does in Vim.
+#?# bindkey -M viins "^F" _history-complete-older
+
+#TODO# bindkey "^S" prepend-sudo
+#TODO# bindkey "^V" prepend-vim
+
+bindkey -M viins "^X^L" history-beginning-search-backward-then-append
+bindkey -M viins "^X^H" _complete_help
+
+# Not adding another one, there's already ^Q# bindkey -M viins "^Y" push-line
+
+#?# Really tough call. Searchy Ctrl-r is so useful# bindkey -M vicmd "^R" redo
