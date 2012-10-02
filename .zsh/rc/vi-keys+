@@ -16,7 +16,6 @@ bindkey "^H" backward-delete-char
 bindkey "^I" expand-or-complete
 bindkey "^K" kill-line
 bindkey "^N" down-line-or-history
-bindkey "^O" accept-line-and-down-history # I wonder what this is for.
 bindkey "^P" up-line-or-history
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
@@ -27,6 +26,15 @@ bindkey "^T" transpose-chars
     bindkey "^[?" which-command # Shows "which" output for the current command
     bindkey "^[H" run-help # run "man" on current command (Alt+Shift+h)
     bindkey -M vicmd "^[H" run-help
+
+    # Say you ran:
+    # % cd ~/src/foo
+    # % vim lib/foo.rb
+    # % rake test
+    #
+    # You could ^r to find the "cd ~/src/foo" line, then hit ^o twice to
+    # execute the subsequent commands.
+    bindkey "^O" accept-line-and-down-history
 
     # Cut the contents of the line then paste when the next prompt appears.
     #  (kind of like backgrounding the current command line for 1 command)
