@@ -3,6 +3,10 @@
 "
 " This scheme will be more detailed than that.
 "
+" Companions to this file are:
+" Rainbow Parens Improved:  http://www.vim.org/scripts/script.php?script_id=4176
+" Indent Guides: https://github.com/nathanaelkane/vim-indent-guides
+"
 " TODO
 "   - More languages, other than Ruby.
 "   - Sync with pry-theme
@@ -13,11 +17,6 @@
 "     "osse │ rking: maybe make a new syntax rule where you fiddle with the
 "       'contains' argument to :syn"
 "
-" A companion idea, but for indentation:
-" https://github.com/nathanaelkane/vim-indent-guides
-"
-" Maybe also:
-" http://www.vim.org/scripts/script.php?script_id=4176
 
 " Do we want this?
 " hi clear
