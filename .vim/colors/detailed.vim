@@ -1,5 +1,4 @@
 " So many 256-color schemes merely shift the palette around, displaying only 8
-" colors total on the screen at any one time.
 "
 " This scheme will be more detailed than that.
 "
@@ -8,41 +7,38 @@
 " Indent Guides: https://github.com/nathanaelkane/vim-indent-guides
 "
 " TODO
-"   - More languages, other than Ruby.
-"   - Sync with pry-theme
+"   - Sync pry-theme
 "   - GUI colors
-"   - Distinguish between, e.g.: class Foo < Bar, which is:
-"     ['rubyBlock','rubyClassDeclaration', 'rubyConstant'] and
-"     ['rubyBlock', 'rubyConstant']'
-"     "osse │ rking: maybe make a new syntax rule where you fiddle with the
-"       'contains' argument to :syn"
+"     Perhaps redo with:
+"     http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
+"   - More languages, other than Ruby.
+"   - Distinguish between bare things versus contained things:
+"    -  class Foo < Bar is:
+"       ['rubyBlock','rubyClassDeclaration', 'rubyConstant'] and
+"       ['rubyBlock', 'rubyConstant']'
 "
-
-" Do we want this?
-" hi clear
+"    -  class Foo
+"         class_call # ['rubyBlock', 'rubyBlock', 'rubyLocalVariableOrMethod']
+"       end
+"       toplevel_stuff ['rubyBlock', 'rubyLocalVariableOrMethod']'
+"
+"       "osse │ rking: maybe make a new syntax rule where you fiddle with the
+"         'contains' argument to :syn"
 
 let colors_name = 'detailed'
 
 " Prevent any screwy setting from causing errors:
 let s:save_cpo = &cpo | set cpo&vim
 
-" TODO - relocate these when things settle down:
+" Show detailed syntax stack
+nmap <Leader>dets :call <SID>SynStack()<CR>
 fun! <SID>SynStack()
   if !exists("*synstack")
     return
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfun
-nmap <Leader>dets :call <SID>SynStack()<CR>
-" (Only works if the test pane is 0)
-fun! <SID>TryInTmuxPane0()
-  w
-  !tmux send -t0 ':colo detailed' C-m
-endfun
-nmap <leader>dbrb :call <SID>TryInTmuxPane0()<cr>
-nmap <leader>dnew :s/hi link \v(\S*).*/call s:fg('\1', '')/<cr>
 
-" Most colors snarfed from Term::ExtendedColor (.pm) -
 " {{{
 let s:c = {
   \'basic8_red': 1,
@@ -51,358 +47,54 @@ let s:c = {
   \'basic8_blue': 4,
   \'basic8_magenta': 5,
   \'basic8_cyan': 6,
-  \'rk_green1': 34,
-  \'rk_purple1': 53,
-  \'rk_darkred1': 88,
-  \'red1': 196,
-  \'red2': 160,
-  \'red3': 124,
-  \'red4': 088,
-  \'red5': 052,
-  \'green1': 156,
-  \'green2': 150,
-  \'green3': 120,
-  \'green4': 114,
-  \'green5': 084,
-  \'green6': 078,
-  \'green7': 155,
-  \'green8': 149,
-  \'green9': 119,
-  \'green10': 113,
-  \'green11': 083,
-  \'green12': 077,
-  \'green13': 047,
-  \'green14': 041,
-  \'green15': 118,
-  \'green16': 112,
-  \'green17': 082,
-  \'green18': 076,
-  \'green19': 046,
-  \'green20': 040,
-  \'green21': 034,
-  \'green22': 028,
-  \'green23': 022,
-  \'green24': 107,
-  \'green25': 071,
-  \'green26': 070,
-  \'green27': 064,
-  \'green28': 065,
-  \'blue1': 075,
-  \'blue2': 074,
-  \'blue3': 073,
-  \'blue4': 039,
-  \'blue5': 038,
-  \'blue6': 037,
-  \'blue7': 033,
-  \'blue8': 032,
-  \'blue9': 031,
-  \'blue10': 027,
-  \'blue11': 026,
-  \'blue12': 025,
-  \'blue13': 021,
-  \'blue14': 020,
-  \'blue15': 019,
-  \'blue16': 018,
-  \'blue17': 017,
-  \'yellow1': 228,
-  \'yellow2': 222,
-  \'yellow3': 192,
-  \'yellow4': 186,
-  \'yellow5': 227,
-  \'yellow6': 221,
-  \'yellow7': 191,
-  \'yellow8': 185,
-  \'yellow9': 226,
-  \'yellow10': 220,
-  \'yellow11': 190,
-  \'yellow12': 184,
-  \'yellow13': 214,
-  \'yellow14': 178,
-  \'yellow15': 208,
-  \'yellow16': 172,
-  \'yellow17': 202,
-  \'yellow18': 166,
-  \'magenta1': 219,
-  \'magenta2': 183,
-  \'magenta3': 218,
-  \'magenta4': 182,
-  \'magenta5': 217,
-  \'magenta6': 181,
-  \'magenta7': 213,
-  \'magenta8': 177,
-  \'magenta9': 212,
-  \'magenta10': 176,
-  \'magenta11': 211,
-  \'magenta12': 175,
-  \'magenta13': 207,
-  \'magenta14': 171,
-  \'magenta15': 205,
-  \'magenta16': 169,
-  \'magenta17': 201,
-  \'magenta18': 165,
-  \'magenta19': 200,
-  \'magenta20': 164,
-  \'magenta21': 199,
-  \'magenta22': 163,
-  \'magenta23': 198,
-  \'magenta24': 162,
-  \'magenta25': 197,
-  \'magenta26': 161,
-  \'gray1': 255,
-  \'gray2': 254,
-  \'gray3': 253,
-  \'gray4': 252,
-  \'gray5': 251,
-  \'gray6': 250,
-  \'gray7': 249,
-  \'gray8': 248,
-  \'gray9': 247,
-  \'gray10': 246,
-  \'gray11': 245,
-  \'gray12': 244,
-  \'gray13': 243,
-  \'gray14': 242,
-  \'gray15': 241,
-  \'gray16': 240,
-  \'gray17': 239,
-  \'gray18': 238,
-  \'gray19': 237,
-  \'gray20': 236,
-  \'gray21': 235,
-  \'gray22': 234,
-  \'gray23': 233,
-  \'gray24': 232,
-  \'purple1': 147,
-  \'purple2': 146,
-  \'purple3': 145,
-  \'purple4': 141,
-  \'purple5': 140,
-  \'purple6': 139,
-  \'purple7': 135,
-  \'purple8': 134,
-  \'purple9': 133,
-  \'purple10': 129,
-  \'purple11': 128,
-  \'purple12': 127,
-  \'purple13': 126,
-  \'purple14': 125,
-  \'purple15': 111,
-  \'purple16': 110,
-  \'purple17': 109,
-  \'purple18': 105,
-  \'purple19': 104,
-  \'purple20': 103,
-  \'purple21': 099,
-  \'purple22': 098,
-  \'purple23': 097,
-  \'purple24': 096,
-  \'purple25': 093,
-  \'purple26': 092,
-  \'purple27': 091,
-  \'purple28': 090,
-  \'purple29': 055,
-  \'purple30': 054,
-  \'cyan1': 159,
-  \'cyan2': 158,
-  \'cyan3': 157,
-  \'cyan4': 153,
-  \'cyan5': 152,
-  \'cyan6': 151,
-  \'cyan7': 123,
-  \'cyan8': 122,
-  \'cyan9': 121,
-  \'cyan10': 117,
-  \'cyan11': 116,
-  \'cyan12': 115,
-  \'cyan13': 087,
-  \'cyan14': 086,
-  \'cyan15': 085,
-  \'cyan16': 081,
-  \'cyan17': 080,
-  \'cyan18': 079,
-  \'cyan19': 051,
-  \'cyan20': 050,
-  \'cyan21': 049,
-  \'cyan22': 045,
-  \'cyan23': 044,
-  \'cyan24': 043,
-  \'orange1': 208,
-  \'orange2': 172,
-  \'orange3': 202,
-  \'orange4': 166,
-  \'orange5': 130,
-  \'aquamarine1': 086,
-  \'aquamarine3': 079,
-  \'blueviolet': 057,
-  \'cadetblue1': 072,
-  \'cadetblue2': 073,
-  \'chartreuse1': 118,
-  \'chartreuse2': 082,
-  \'chartreuse3': 070,
-  \'chartreuse4': 064,
-  \'cornflowerblue': 069,
-  \'cornsilk1': 230,
-  \'darkblue': 018,
-  \'darkcyan': 036,
-  \'darkgoldenrod': 136,
-  \'darkgreen': 022,
-  \'darkkhaki': 143,
-  \'darkmagenta1': 090,
-  \'darkmagenta2': 091,
-  \'darkolivegreen1': 191,
-  \'darkolivegreen2': 155,
-  \'darkolivegreen3': 107,
-  \'darkolivegreen4': 113,
-  \'darkolivegreen5': 149,
-  \'darkorange3': 130,
-  \'darkorange4': 166,
-  \'darkorange1': 208,
-  \'darkred1': 052,
-  \'darkred2': 088,
-  \'darkseagreen1': 158,
-  \'darkseagreen2': 157,
-  \'darkseagreen3': 150,
-  \'darkseagreen4': 071,
-  \'darkslategray1': 123,
-  \'darkslategray2': 087,
-  \'darkslategray3': 116,
-  \'darkturquoise': 044,
-  \'darkviolet': 128,
-  \'deeppink1': 198,
-  \'deeppink2': 197,
-  \'deeppink3': 162,
-  \'deeppink4': 125,
-  \'deepskyblue1': 039,
-  \'deepskyblue2': 038,
-  \'deepskyblue3': 031,
-  \'deepskyblue4': 023,
-  \'dodgerblue1': 033,
-  \'dodgerblue2': 027,
-  \'dodgerblue3': 026,
-  \'gold1': 220,
-  \'gold3': 142,
-  \'greenyellow': 154,
-  \'grey0': 016,
-  \'grey3': 232,
-  \'grey7': 233,
-  \'grey11': 234,
-  \'grey15': 235,
-  \'grey19': 236,
-  \'grey23': 237,
-  \'grey27': 238,
-  \'grey30': 239,
-  \'grey35': 240,
-  \'grey37': 059,
-  \'grey39': 241,
-  \'grey42': 242,
-  \'grey46': 243,
-  \'grey50': 244,
-  \'grey53': 102,
-  \'grey54': 245,
-  \'grey58': 246,
-  \'grey62': 247,
-  \'grey63': 139,
-  \'grey66': 248,
-  \'grey69': 145,
-  \'grey70': 249,
-  \'grey74': 250,
-  \'grey78': 251,
-  \'grey82': 252,
-  \'grey84': 188,
-  \'grey85': 253,
-  \'grey89': 254,
-  \'grey93': 255,
-  \'grey100': 231,
-  \'honeydew2': 194,
-  \'hotpink2': 169,
-  \'hotpink3': 132,
-  \'hotpink': 205,
-  \'indianred1': 203,
-  \'indianred': 167,
-  \'khaki1': 228,
-  \'khaki3': 185,
-  \'lightcoral': 210,
-  \'lightcyan1': 195,
-  \'lightcyan3': 152,
-  \'lightgoldenrod1': 227,
-  \'lightgoldenrod2': 186,
-  \'lightgoldenrod3': 179,
-  \'lightgreen': 119,
-  \'lightpink1': 217,
-  \'lightpink3': 174,
-  \'lightpink4': 095,
-  \'lightsalmon1': 216,
-  \'lightsalmon2': 137,
-  \'lightsalmon3': 173,
-  \'lightseagreen': 037,
-  \'lightskyblue1': 153,
-  \'lightskyblue2': 109,
-  \'lightskyblue3': 110,
-  \'lightslateblue': 105,
-  \'lightslategrey': 103,
-  \'lightsteelblue1': 189,
-  \'lightsteelblue3': 146,
-  \'lightsteelblue': 147,
-  \'lightyellow3': 187,
-  \'mediumorchid1': 171,
-  \'mediumorchid3': 133,
-  \'mediumorchid': 134,
-  \'mediumpurple1': 141,
-  \'mediumpurple2': 135,
-  \'mediumpurple3': 097,
-  \'mediumpurple4': 060,
-  \'mediumpurple': 104,
-  \'mediumspringgreen': 049,
-  \'mediumturquoise': 080,
-  \'mediumvioletred': 126,
-  \'mistyrose1': 224,
-  \'mistyrose3': 181,
-  \'navajowhite1': 223,
-  \'navajowhite3': 144,
-  \'navyblue': 017,
-  \'orangered1': 202,
-  \'orchid1': 213,
-  \'orchid2': 212,
-  \'orchid': 170,
-  \'palegreen1': 121,
-  \'palegreen3': 077,
-  \'paleturquoise1': 159,
-  \'paleturquoise4': 066,
-  \'palevioletred1': 211,
-  \'pink1': 218,
-  \'pink3': 175,
-  \'plum1': 219,
-  \'plum2': 183,
-  \'plum3': 176,
-  \'plum4': 096,
-  \'purple': 129,
-  \'rosybrown': 138,
-  \'royalblue1': 063,
-  \'salmon1': 209,
-  \'sandybrown': 215,
-  \'seagreen1': 084,
-  \'seagreen2': 083,
-  \'seagreen3': 078,
-  \'skyblue1': 117,
-  \'skyblue2': 111,
-  \'skyblue3': 074,
-  \'slateblue1': 099,
-  \'slateblue3': 061,
-  \'springgreen1': 048,
-  \'springgreen2': 042,
-  \'springgreen3': 035,
-  \'springgreen4': 029,
-  \'steelblue1': 075,
-  \'steelblue3': 068,
-  \'steelblue': 067,
-  \'tan': 180,
-  \'thistle1': 225,
-  \'thistle3': 182,
-  \'turquoise2': 045,
-  \'turquoise4': 030,
-  \'violet': 177,
-  \'wheat1': 229,
-  \'wheat4': 101,
+  \'rk_brighter_red': 160,
+  \'TOUSE: red52': 52,
+  \'red88': 88,
+  \'red124': 124,
+  \'red160': 160,
+  \'red196': 196,
+  \'yellow58': 58,
+  \'yellow148': 148,
+  \'yellow178': 178,
+  \'orange208': 208,
+  \'light_yellow230': 229,
+  \'TOUSE: graygreen': 23,
+  \'green34': 34,
+  \'seafoam': 30,
+  \'TOUSE: seafoam2': 35,
+  \'teal50': 50,
+  \'lavender104': 104,
+  \'purple53': 53,
+  \'purple90': 90,
+  \'purple125': 125,
+  \'purple126': 126,
+  \'purple141': 141,
+  \'purple225': 225,
+  \'gray16': 16,
+  \'gray232': 232,
+  \'gray233': 233,
+  \'gray234': 234,
+  \'gray235': 235,
+  \'gray236': 236,
+  \'gray237': 237,
+  \'gray238': 238,
+  \'gray239': 239,
+  \'gray240': 240,
+  \'gray241': 241,
+  \'gray242': 242,
+  \'gray243': 243,
+  \'gray244': 244,
+  \'gray245': 245,
+  \'gray246': 246,
+  \'gray247': 247,
+  \'gray248': 248,
+  \'gray249': 249,
+  \'gray250': 250,
+  \'gray251': 251,
+  \'gray252': 252,
+  \'gray253': 253,
+  \'gray254': 254,
+  \'gray255': 255,
   \}
 " }}}
 
@@ -416,6 +108,10 @@ fun! s:fg(group, color_name, ...)
   exe cmd
 endfun
 
+" https://github.com/bitc/vim-bad-whitespace
+hi BadWhitespace  ctermbg=58
+
+" Basic/Default-like Palette {{{
 hi SpecialKey     term=bold ctermfg=81 guifg=Cyan
 hi NonText        term=bold ctermfg=12 gui=bold guifg=Blue
 hi Directory      term=bold ctermfg=159 guifg=Cyan
@@ -469,8 +165,9 @@ hi Underlined     term=underline cterm=underline ctermfg=81 gui=underline guifg=
 hi Ignore         ctermfg=0 guifg=bg
 hi Error          term=reverse ctermfg=15 ctermbg=9 guifg=White guibg=Red
 hi Todo           term=standout ctermfg=0 ctermbg=11 guifg=Blue guibg=Yellow
+" }}}
 
-" These are the ones I'm trying to specialize instead of "link"
+" Default links {{{
 hi link String          Constant
 hi link Character       Constant
 hi link Number          Constant
@@ -482,7 +179,6 @@ hi link Repeat          Statement
 hi link Label           Statement
 hi link Operator        Statement
 hi link Keyword         Statement
-call s:fg('Exception', 'orange1') " Like default yellow but more warny.
 hi link Include         PreProc
 hi link Define          PreProc
 hi link Macro           PreProc
@@ -513,41 +209,61 @@ hi link rubyGlobalVariable  rubyIdentifier
 hi link rubyPredefinedVariable  rubyPredefinedIdentifier
 hi link rubyInvalidVariable  Error
 hi link rubyNoInterpolation  rubyString
+"}}}
+
+call s:fg('Exception', 'orange208') " Like default yellow but more warny.
+
+call s:fg('rubyConstant', 'green34')
+
+call s:fg('rubyClass', 'purple126', 'bold')
+call s:fg('rubyModule', 'purple126')
+call s:fg('rubyDefine', 'basic8_magenta')
+call s:fg('rubyInclude', 'purple53')
+
+call s:fg('rubyBlock', 'purple225')
+call s:fg('rubyMethodBlock', 'gray254')
+call s:fg("rubyDoBlock", "light_yellow230")
+" hi rubyDoBlock    cleared
+
 " hi NONE           cleared
 " hi rubyDelimEscape cleared
-call s:fg('rubyString', 'rk_darkred1')
+call s:fg('rubyString', 'red88')
 " hi rubyNestedParentheses cleared
 " hi rubyNestedCurlyBraces cleared
 " hi rubyNestedAngleBrackets cleared
 " hi rubyNestedSquareBrackets cleared
-hi link rubyRegexpSpecial  Special
-hi link rubyRegexpComment  Comment
-" hi rubyRegexpParens cleared
-hi link rubyRegexpCharClass  rubyRegexpSpecial
-hi link rubyRegexpEscape  rubyRegexpSpecial
-" hi rubyRegexpBrackets cleared
-hi link rubyRegexpQuantifier  rubyRegexpSpecial
-hi link rubyRegexpAnchor  rubyRegexpSpecial
-hi link rubyRegexpDot   rubyRegexpCharClass
+call s:fg('rubyRegexpSpecial', 'seafoam')
+call s:fg('rubyRegexpComment', 'gray238')
+
+" Not sure why these two aren't doing anything. Has something to do with
+" them originally being like: hi clear rubyRegexpParens
+call s:fg('rubyRegexpParens', 'rk_brighter_red')
+call s:fg('rubyRegexpBrackets', 'rk_brighter_red')
+
+call s:fg('rubyRegexpCharClass', 'basic8_green')
+call s:fg('rubyRegexpQuantifier', 'yellow148')
+call s:fg('rubyRegexpEscape', 'purple90', 'bold')
+call s:fg('rubyRegexpAnchor', 'purple90')
+call s:fg('rubyRegexpDot', 'green34')
+call s:fg('rubyRegexpDelimiter', 'red88', 'bold')
+call s:fg('rubyRegexp', 'red160')
 hi link rubyASCIICode   Character
-hi link rubyInteger     Number
-hi link rubyFloat       Float
-" hi rubyLocalVariableOrMethod cleared
+
+call s:fg('rubyPseudoVariable', 'purple125')
+call s:fg('rubyInteger', 'red124')
+call s:fg('rubyFloat', 'red160')
+
 " hi rubyBlockArgument cleared
-call s:fg('rubyConstant', 'rk_green1')
-hi link rubySymbol      Constant
-hi link rubyBlockParameter  rubyIdentifier
+call s:fg('rubySymbol', 'lavender104')
+call s:fg('rubyBlockParameter', 'basic8_cyan', 'bold')
 " hi rubyBlockParameterList cleared
 hi link rubyPredefinedConstant  rubyPredefinedIdentifier
-hi link rubyRegexpDelimiter  rubyStringDelimiter
-hi link rubyRegexp      rubyString
 hi link rubyStringDelimiter  Delimiter
 hi link rubySymbolDelimiter  rubyStringDelimiter
 " hi rubyHeredocStart cleared
 " hi rubyAliasDeclaration2 cleared
 " hi rubyAliasDeclaration cleared
 hi link rubyBoolean     Boolean
-hi link rubyPseudoVariable  Constant
 " hi rubyMethodDeclaration cleared
 hi link rubyOperator    Operator
 " hi rubyClassDeclaration cleared
@@ -556,21 +272,16 @@ hi link rubyFunction    Function
 hi link rubyControl     Statement
 hi link rubyKeyword     Keyword
 hi link rubyBeginEnd    Statement
-call s:fg('rubyDefine', 'purple9')
-call s:fg('rubyClass', 'purple13', 'bold')
-call s:fg('rubyModule', 'purple13')
-" hi rubyMethodBlock cleared
 " hi rubyBlock      cleared
 hi link rubyConditionalModifier  rubyConditional
 hi link rubyRepeatModifier  rubyRepeat
-" hi rubyDoBlock    cleared
 " hi rubyCurlyBlock cleared
 " hi rubyArrayDelimiter cleared
 " hi rubyArrayLiteral cleared
 " hi rubyBlockExpression cleared
 " hi rubyCaseExpression cleared
 " hi rubyConditionalExpression cleared
-call s:fg('rubyRepeat', 'yellow14')
+call s:fg('rubyRepeat', 'yellow178')
 hi link rubyOptionalDo  rubyRepeat
 " hi rubyOptionalDoLine cleared
 " hi rubyRepeatExpression cleared
@@ -578,10 +289,9 @@ hi link rubyAccess      Statement
 hi link rubyAttribute   Statement
 hi link rubyEval        Statement
 hi link rubyException   Exception
-call s:fg('rubyInclude', 'rk_purple1')
-call s:fg('rubySharpBang', 'grey27')
+call s:fg('rubySharpBang', 'gray238')
 hi link rubySpaceError  rubyError
-call s:fg('rubyComment', 'grey39')
+call s:fg('rubyComment', 'gray241')
 " hi rubyMultilineComment cleared
 hi link rubyDocumentation  Comment
 " hi rubyKeywordAsMethod cleared
@@ -591,7 +301,8 @@ hi link rubyIdentifier  Identifier
 hi link rubyPredefinedIdentifier  rubyIdentifier
 hi link rubyPseudoOperator  rubyOperator
 hi link rubyError       Error
-hi BadWhitespace  ctermbg=9 guibg=red
+hi link rubyError       Error
+call s:fg('rubyRailsARAssociationMethod', 'teal50')
 
 let &cpo = s:save_cpo
 
