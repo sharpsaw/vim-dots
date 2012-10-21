@@ -46,9 +46,6 @@ fun! SetupVAM()
   "   :FinishRecovery when done
   "   Or "a"bort to get back to the old menu
 
-  " vim-buffalo is for \l, to hop between buffers quickly
-  "   (vimple is a support lib for buffalo)
-
   " CtrlP.vim is an amazing plugin for fuzzyfinding. Hit ^P in normal mode.
 
   " vim-coffee-script doesn't really belong here, but :h :CoffeeCompile
@@ -68,8 +65,6 @@ fun! SetupVAM()
         \ 'textobj-entire',
         \ 'github:kana/vim-textobj-underscore',
         \ 'github:Raimondi/vim-transpose-words',
-        \ 'github:dahu/vimple',
-        \ 'github:Raimondi/vim-buffalo',
         \ 'github:kien/ctrlp.vim',
         \ 'github:kchmck/vim-coffee-script',
         \ ]
