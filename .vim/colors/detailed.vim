@@ -2,8 +2,19 @@
 "
 " This scheme will be more detailed than that.
 "
+" The idea is that your eyes will learn to pick up on subtler patterns without
+" requiring as much from your conscious mind. (And, I've found: it does work).
+"
+" This style isn't trying to be 'cool' in any way. My goal isn't to wear
+" shades and code: my goal is to maximize info bandwidth from the computer to
+" me.
+"
+" Also note that some small effort was taken to be similar to the default vim
+" syntax highlighting where it makes sense. That is, "def" is magenta in the
+" default, so vim-detailed makes it a shade of purple (and uses different
+" shades for all the other magenta things from the default colorscheme).
+"
 " Companions to this file are:
-" Rainbow Parens Improved:  http://www.vim.org/scripts/script.php?script_id=4176
 " Indent Guides: https://github.com/nathanaelkane/vim-indent-guides
 "
 " TODO
@@ -27,19 +38,20 @@
 
 let colors_name = 'detailed'
 
+" It would be rather hard to make this work on both black and white. If you're
+" a big fan of white bg's, let me know, and we can collaborate on a solution.
+set bg=dark
+
 " Prevent any screwy setting from causing errors:
 let s:save_cpo = &cpo | set cpo&vim
 
 " Show detailed syntax stack
 nmap <Leader>dets :call <SID>SynStack()<CR>
 fun! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfun
 
-" {{{
+" Color Palette {{{
 let s:c = {
   \'basic8_red': 1,
   \'basic8_green': 2,
@@ -47,15 +59,19 @@ let s:c = {
   \'basic8_blue': 4,
   \'basic8_magenta': 5,
   \'basic8_cyan': 6,
-  \'rk_brighter_red': 160,
+  \'NO_SHOW__DARNIT': 160,
   \'TOUSE: red52': 52,
   \'red88': 88,
   \'red124': 124,
   \'red160': 160,
   \'red196': 196,
   \'yellow58': 58,
+  \'yellow100': 100,
+  \'yellow136': 136,
+  \'yellow142': 142,
   \'yellow148': 148,
   \'yellow178': 178,
+  \'yellow220': 220,
   \'orange208': 208,
   \'light_yellow230': 229,
   \'TOUSE: graygreen': 23,
@@ -63,6 +79,10 @@ let s:c = {
   \'seafoam': 30,
   \'TOUSE: seafoam2': 35,
   \'teal50': 50,
+  \'blue19': 19,
+  \'blue20': 20,
+  \'blue21': 21,
+  \'blue75': 75,
   \'lavender104': 104,
   \'purple53': 53,
   \'purple90': 90,
@@ -201,9 +221,7 @@ hi link rubyMethodExceptional  rubyDefine
 hi link rubyTodo        Todo
 hi link rubyStringEscape  Special
 hi link rubyQuoteEscape  rubyStringEscape
-hi link rubyInterpolationDelimiter  Delimiter
 " hi rubyInterpolation cleared
-hi link rubyInstanceVariable  rubyIdentifier
 hi link rubyClassVariable  rubyIdentifier
 hi link rubyGlobalVariable  rubyIdentifier
 hi link rubyPredefinedVariable  rubyPredefinedIdentifier
@@ -220,14 +238,15 @@ call s:fg('rubyModule', 'purple126')
 call s:fg('rubyDefine', 'basic8_magenta')
 call s:fg('rubyInclude', 'purple53')
 
+call s:fg('rubyMethodBlock', 'gray250') " Contents of methods, basically
+call s:fg('rubyDoBlock', 'light_yellow230')
 call s:fg('rubyBlock', 'purple225')
-call s:fg('rubyMethodBlock', 'gray254')
-call s:fg("rubyDoBlock", "light_yellow230")
-" hi rubyDoBlock    cleared
+call s:fg('rubyLocalVariableOrMethod', 'NO_SHOW__DARNIT')
+call s:fg('rubyInstanceVariable', 'blue75')
 
-" hi NONE           cleared
 " hi rubyDelimEscape cleared
 call s:fg('rubyString', 'red88')
+call s:fg('rubyInterpolationDelimiter', 'purple90')
 " hi rubyNestedParentheses cleared
 " hi rubyNestedCurlyBraces cleared
 " hi rubyNestedAngleBrackets cleared
@@ -235,10 +254,8 @@ call s:fg('rubyString', 'red88')
 call s:fg('rubyRegexpSpecial', 'seafoam')
 call s:fg('rubyRegexpComment', 'gray238')
 
-" Not sure why these two aren't doing anything. Has something to do with
-" them originally being like: hi clear rubyRegexpParens
-call s:fg('rubyRegexpParens', 'rk_brighter_red')
-call s:fg('rubyRegexpBrackets', 'rk_brighter_red')
+call s:fg('rubyRegexpParens', 'NO_SHOW__DARNIT')
+call s:fg('rubyRegexpBrackets', 'NO_SHOW__DARNIT')
 
 call s:fg('rubyRegexpCharClass', 'basic8_green')
 call s:fg('rubyRegexpQuantifier', 'yellow148')
@@ -273,7 +290,10 @@ hi link rubyControl     Statement
 hi link rubyKeyword     Keyword
 hi link rubyBeginEnd    Statement
 " hi rubyBlock      cleared
-hi link rubyConditionalModifier  rubyConditional
+call s:fg('rubyAccess', 'yellow100')
+call s:fg('rubyAttribute', 'yellow178')
+hi link rubyEval        Statement
+call s:fg('rubyConditionalModifier', 'yellow148', 'bold')
 hi link rubyRepeatModifier  rubyRepeat
 " hi rubyCurlyBlock cleared
 " hi rubyArrayDelimiter cleared
@@ -285,9 +305,6 @@ call s:fg('rubyRepeat', 'yellow178')
 hi link rubyOptionalDo  rubyRepeat
 " hi rubyOptionalDoLine cleared
 " hi rubyRepeatExpression cleared
-hi link rubyAccess      Statement
-hi link rubyAttribute   Statement
-hi link rubyEval        Statement
 hi link rubyException   Exception
 call s:fg('rubySharpBang', 'gray238')
 hi link rubySpaceError  rubyError
@@ -305,5 +322,42 @@ hi link rubyError       Error
 call s:fg('rubyRailsARAssociationMethod', 'teal50')
 
 let &cpo = s:save_cpo
+
+" Inlined from v2.3 of http://www.vim.org/scripts/script.php?script_id=4176
+" 1. to remove the external dep, 2. to work around vim-rails resetting it.
+" Thanks!
+fun s:fatpacked_rainbow_parens()
+  let guifgs = exists('g:rainbow_guifgs')? g:rainbow_guifgs : [
+        \ 'DarkOrchid3', 'RoyalBlue3', 'SeaGreen3',
+        \ 'DarkOrange3', 'FireBrick',
+        \ ]
+
+  let ctermfgs = exists('g:rainbow_ctermfgs')? g:rainbow_ctermfgs : [
+        \ 'darkgray', 'Darkblue', 'darkmagenta',
+        \ 'darkcyan', 'darkred', 'darkgreen',
+        \ ]
+
+  let max = has('gui_running')? len(guifgs) : len(ctermfgs)
+
+  let cmd = 'syn region %s matchgroup=%s start=/%s/ end=/%s/ containedin=%s contains=%s'
+  let str = 'TOP'
+  for each in range(1, max)
+    let str .= ',lv'.each
+  endfor
+  for [left , right] in [['(',')'],['\[','\]'],['{','}']]
+    for each in range(1, max - 1)
+      exe printf(cmd, 'lv'.each, 'lv'.each.'c', left, right, 'lv'.(each+1) , str)
+    endfor
+    exe printf(cmd, 'lv'.max, 'lv'.max.'c', left, right, 'lv1' , str)
+  endfor
+
+  for id in range(1 , max)
+    let ctermfg = ctermfgs[(max - id) % len(ctermfgs)]
+    let guifg = guifgs[(max - id) % len(guifgs)]
+    exe 'hi default lv'.id.'c ctermfg='.ctermfg.' guifg='.guifg
+  endfor
+endfun
+
+au Syntax * call s:fatpacked_rainbow_parens()
 
 " vim:foldmethod=marker
