@@ -326,7 +326,7 @@ let &cpo = s:save_cpo
 " Inlined from v2.3 of http://www.vim.org/scripts/script.php?script_id=4176
 " 1. to remove the external dep, 2. to work around vim-rails resetting it.
 " Thanks!
-fun s:fatpacked_rainbow_parens()
+fun! s:fatpacked_rainbow_parens()
   let guifgs = exists('g:rainbow_guifgs')? g:rainbow_guifgs : [
         \ 'DarkOrchid3', 'RoyalBlue3', 'SeaGreen3',
         \ 'DarkOrange3', 'FireBrick',
