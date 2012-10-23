@@ -56,7 +56,7 @@ fun! SetupVAM()
         \ 'ack',
         \ 'bad-whitespace',
         \ 'endwise',
-        \ 'recover',
+        \ 'github:chrisbra/Recover.vim',
         \ 'gitv',
         \ 'textobj-user',
         \ 'textobj-indent',
