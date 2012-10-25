@@ -1,0 +1,7 @@
+if [ $# = 0 ]; then
+    vim +Ack\ ${${history[$((HISTCMD-1))]}#* }
+else
+    # XXX needs better quote handling. vack foo\ bar  comes in as 2 args.
+    vim +Ack\ "$@"
+fi
+# vim:ft=zsh
