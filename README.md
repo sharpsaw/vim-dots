@@ -7,6 +7,12 @@ Contains some `.vim/` boosters.
 
 Makes zsh be vi-keys, with a few spiffups.
 
+Shell Stuff
+-----------
+
+* `vat` → Like `cat` but use vim.
+* `vack` → Run `ack` through vim (if called without args, use previous line's args)
+
 Context
 -------
 
