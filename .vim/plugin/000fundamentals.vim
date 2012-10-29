@@ -9,7 +9,7 @@ set autoread nobackup ttyfast viminfo='200,\"5000
 set wildmode=list:longest,full suffixes=.bak,~,.o,.h,.info,.swp,.obj,.class
 set encoding=utf-8 termencoding=utf-8
 set modeline
-set hidden " Popular on #vim, but takes some getting used to.
+" set hidden " Popular on #vim, but takes some getting used to.
 
 " From :h line()
 " Restores cursor position on reopen.
