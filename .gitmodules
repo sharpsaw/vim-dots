@@ -19,3 +19,21 @@
 [submodule ".vim/bundle/ack.vim"]
 	path = .vim/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim
+[submodule ".vim/bundle/vim-bad-whitespace"]
+	path = .vim/bundle/vim-bad-whitespace
+	url = git://github.com/bitc/vim-bad-whitespace
+[submodule ".vim/bundle/vim-textobj-diff"]
+	path = .vim/bundle/vim-textobj-diff
+	url = git://github.com/kana/vim-textobj-diff
+[submodule ".vim/bundle/vim-textobj-entire"]
+	path = .vim/bundle/vim-textobj-entire
+	url = git://github.com/kana/vim-textobj-entire
+[submodule ".vim/bundle/vim-textobj-indent"]
+	path = .vim/bundle/vim-textobj-indent
+	url = git://github.com/kana/vim-textobj-indent
+[submodule ".vim/bundle/vim-textobj-lastpat"]
+	path = .vim/bundle/vim-textobj-lastpat
+	url = git://github.com/kana/vim-textobj-lastpat
+[submodule ".vim/bundle/vim-textobj-user"]
+	path = .vim/bundle/vim-textobj-user
+	url = git://github.com/kana/vim-textobj-user
