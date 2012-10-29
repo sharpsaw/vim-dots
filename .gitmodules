@@ -16,3 +16,6 @@
 [submodule ".vim/bundle/vim-detailed"]
 	path = .vim/bundle/vim-detailed
 	url = git://github.com/rking/vim-detailed
+[submodule ".vim/bundle/ack.vim"]
+	path = .vim/bundle/ack.vim
+	url = https://github.com/mileszs/ack.vim
