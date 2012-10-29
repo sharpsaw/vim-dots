@@ -1,0 +1,18 @@
+[submodule ".vim/bundle/Recover.vim"]
+	path = .vim/bundle/Recover.vim
+	url = git://github.com/chrisbra/Recover.vim
+[submodule ".vim/bundle/vim-textobj-underscore"]
+	path = .vim/bundle/vim-textobj-underscore
+	url = git://github.com/kana/vim-textobj-underscore
+[submodule ".vim/bundle/vim-coffee-script"]
+	path = .vim/bundle/vim-coffee-script
+	url = git://github.com/kchmck/vim-coffee-script
+[submodule ".vim/bundle/ctrlp.vim"]
+	path = .vim/bundle/ctrlp.vim
+	url = git://github.com/kien/ctrlp.vim
+[submodule ".vim/bundle/vim-transpose-words"]
+	path = .vim/bundle/vim-transpose-words
+	url = git://github.com/Raimondi/vim-transpose-words
+[submodule ".vim/bundle/vim-detailed"]
+	path = .vim/bundle/vim-detailed
+	url = git://github.com/rking/vim-detailed
