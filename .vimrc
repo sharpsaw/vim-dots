@@ -17,6 +17,12 @@ fun! SetupVAM()
 
   "README
 
+  " vim-detailed - Like the default scheme, but with more expressiveness.
+  "   See: http://www.vim.org/scripts/script.php?script_id=4297
+  "   To enable it, you need to do something like:
+  "     echo colo detailed > .vim/plugin/zzz-colorscheme.vim
+  "   (Note: Only detailed for Ruby, currently)
+
   " The textobjs here provide extra motions/nouns, e.g. vae selects the entire
   " buffer, da/ deletes to the last pattern, etc. If you play with it as "v__"
   " you'll see what each does, or else :h textobj<tab>
@@ -53,6 +59,7 @@ fun! SetupVAM()
   "end README snip
 
   let want = [
+        \ 'github:rking/vim-detailed',
         \ 'ack',
         \ 'bad-whitespace',
         \ 'endwise',
