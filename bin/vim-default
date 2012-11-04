@@ -1,0 +1,3 @@
+#!/bin/sh -xe
+## Almost default settings, but restore "nocompatible" and syntax highlighting.
+vim -u NONE +set\ nocompatible +syntax\ on "$@"
