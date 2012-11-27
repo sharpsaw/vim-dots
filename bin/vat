@@ -1,19 +1,37 @@
-#!/bin/bash
+#!/bin/sh
 #!/usr/bin/env vim
 #! This is a bash script that executes itself as a vimscript to do its work
+#! Based on _v by Magnus Woldrich: https://github.com/trapd00r/utils/blob/master/_v
+#! Then from: http://www.vim.org/scripts/script.php?script_id=4325
 
 : if 0
-  tmpfile=$(mktemp -t vimcat.XXXXXXXX)
-  exec 9<>"$tmpfile"
-  rm "$tmpfile"
+  tmp_file=/tmp/vimcat_${$}
+  trap "rm -f ${tmp_file}" HUP INT QUIT ILL TRAP KILL BUS TERM
 
-  [[ "${0:0:1}" == "/" ]] && script="$0" || script="$PWD/$0"
+  script=$(command -v ${0})
 
-  /usr/bin/vim -u NONE +set\ nocp +syntax\ on \
-      -e -X -R "$@" -c "source $script" -c "visual" \
-      -c 'colo detailed' \
-      -c 'bufdo call AnsiHighlight()' -c qa >/dev/null 2>/dev/null
-  exec cat <&9
+  for file in "${@}"
+  do
+    if [ "${#}" -ge 2 ]
+    then
+      echo "==> ${file} <=="
+    fi
+
+    # Check that the file exists
+    if test -r "${file}" -a -f "${file}"; then
+      vim -E -X -R -c "source ${script} | visual | call AnsiHighlight(\"${tmp_file}\") | q" "${file}" </dev/tty >/dev/null 2>&1
+      cat ${tmp_file}
+      echo
+    else
+      echo "vcat: Cannot read file: ${file}" >&2
+    fi
+  done
+
+  rm -f "${tmp_file}"
+
+  exit
+
+: endfor
 : endif
 
 " AnsiHighlight: Allows for marking up a file, using ANSI color escapes when
@@ -117,7 +135,7 @@ function! s:GroupToAnsi(groupnum)
     unlet bg
   endif
 
-  if !exists('bg') && !groupnum == hlID('Normal')
+  if !exists('bg')
     let bg = synIDattr(hlID('Normal'), 'bg', s:type)
     if bg == "" || bg == -1
       unlet bg
@@ -140,6 +158,8 @@ function! s:GroupToAnsi(groupnum)
     let retv .= ";4" . bg
   elseif exists('bg')
     let retv .= ";48;5;" . bg
+  else
+    let retv .= ";49"
   endif
 
   let retv .= "m"
@@ -149,7 +169,7 @@ function! s:GroupToAnsi(groupnum)
   return retv
 endfunction
 
-function! AnsiHighlight()
+function! AnsiHighlight(output_file)
   let retv = []
 
   for lnum in range(1, line('$'))
@@ -176,5 +196,7 @@ function! AnsiHighlight()
   " Reset the colors to default after displaying the file
   let retv[-1] .= "\<Esc>[0m"
 
-  return writefile(retv, '/proc/self/fd/9')
+  return writefile(retv, a:output_file)
 endfunction
+
+" vim: sw=2 sts=2 et ft=vim
