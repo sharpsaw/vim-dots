@@ -24,3 +24,21 @@ map <f8> \8
 map <f9> \9
 map <f11> \H
 map <f12> \h
+
+" Hack for improper terminals (happens in wemux for some reason)
+map [11~ <f1>
+map [12~ <f2>
+map [13~ <f3>
+map [14~ <f4>
+imap [11~ <f1>
+imap [12~ <f2>
+imap [13~ <f3>
+imap [14~ <f4>
+map OA <up>
+map OB <down>
+map OC <right>
+map OD <left>
+imap OA <up>
+imap OB <down>
+imap OC <right>
+imap OD <left>
