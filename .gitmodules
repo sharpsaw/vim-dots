@@ -40,3 +40,6 @@
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule ".vim/bundle/rsi"]
+	path = .vim/bundle/rsi
+	url = https://github.com/tpope/vim-rsi/
