@@ -59,6 +59,8 @@ bindkey "^T" transpose-chars
     bindkey "^[P" history-search-backward
     bindkey "^[p" history-search-backward
 
+    # duplicate the token to the left:
+    bindkey "^[^_" copy-prev-word
 
 # Things that have more efficient bindings, but keeping for compatibility with
 # people used to them:
@@ -106,7 +108,6 @@ bindkey "^XG" list-expand
 # TODO: Learn these, too:
 #bindkey "^[\$" spell-word
 #bindkey "^[-" neg-argument # TODO: figure out how to use this
-#bindkey "^[^_" copy-prev-word
 
 # And now, for the bummer of the story.
 # Since that ^[x means Alt+x, zsh can't distinguish between the two.  Maybe
