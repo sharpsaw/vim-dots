@@ -1,7 +1,7 @@
 set history=9999
 set expandtab tabstop=8 shiftwidth=4 softtabstop=4
 set hlsearch notimeout
-" clipboard=
+set clipboard=
 set ignorecase smartcase
 
 set nobackup ttyfast viminfo='200,\"5000
