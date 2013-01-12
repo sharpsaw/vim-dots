@@ -185,7 +185,11 @@ set bind-tty-special-chars off
 $if Ruby
     $if mode=vi
         set keymap vi-command
+        "[14~":   "Ils -l\n"        # <F4> (expects pry >= 0.9.11)
         "[15~":   "\C-lIwhereami\n" # <F5>
+        "[28~":   "Iedit -c\n"      # <Shift+F5> (urxvt)
+        "[17~":   "Iup\n"           # <F6>
+        "[18~":   "Idown\n"         # <F7>
         "[19~":   "Icontinue\n"     # <F8>
         "[32~":   "Itry-again\n"    # <Shift-F8> (urxvt)
         "[19;2~": "Itry-again\n"    # <Shift-F8> (xterm, gnome-terminal)
@@ -199,7 +203,11 @@ $if Ruby
         "OB": next-history
         "[B": next-history
     $else
+        "\e[14~":   "ls -l\n"
         "\e[15~":   "\C-lwhereami\n"
+        "\e[28~":   "edit -c\n"
+        "\e[17~":   "up\n"
+        "\e[18~":   "down\n"
         "\e[19~":   "continue\n"
         "\e[32~":   "try-again\n"
         "\e[19;2~": "try-again\n"
