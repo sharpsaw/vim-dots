@@ -43,3 +43,6 @@
 [submodule ".vim/bundle/rsi"]
 	path = .vim/bundle/rsi
 	url = https://github.com/tpope/vim-rsi/
+[submodule ".vim/bundle/tcomment"]
+	path = .vim/bundle/tcomment
+	url = https://github.com/tomtom/tcomment_vim.git
