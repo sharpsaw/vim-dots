@@ -18,7 +18,7 @@
 	url = git://github.com/rking/vim-detailed
 [submodule ".vim/bundle/ack.vim"]
 	path = .vim/bundle/ack.vim
-	url = https://github.com/mileszs/ack.vim
+	url = https://github.com/rking/ack.vim
 [submodule ".vim/bundle/vim-bad-whitespace"]
 	path = .vim/bundle/vim-bad-whitespace
 	url = git://github.com/bitc/vim-bad-whitespace
