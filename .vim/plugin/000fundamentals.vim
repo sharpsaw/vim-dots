@@ -13,4 +13,4 @@ set modeline
 " Restores cursor position on reopen.
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
-"  let g:netrw_list_hide = '^..?$,^tags$'
+let g:netrw_list_hide = '^..?$,^tags$'
