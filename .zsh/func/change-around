@@ -6,6 +6,5 @@ zle vi-backward-char
 zle vi-delete-char
 zle vi-delete-char
 zle vi-insert
-echo "Yo"
 # (From https://github.com/paradigm/dotfiles/blob/master/.zshrc)
 # vim:ft=zsh
