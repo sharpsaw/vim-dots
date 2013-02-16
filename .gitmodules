@@ -49,6 +49,6 @@
 [submodule ".vim/bundle/sensible"]
 	path = .vim/bundle/sensible
 	url = https://github.com/tpope/vim-sensible
-[submodule ".vim/bundler/tabular"]
-	path = .vim/bundler/tabular
+[submodule ".vim/bundle/tabular"]
+	path = .vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular
