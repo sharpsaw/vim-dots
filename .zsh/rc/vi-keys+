@@ -20,6 +20,11 @@ bindkey "^P" up-line-or-history
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 bindkey "^T" transpose-chars
+bindkey "^U" kill-whole-line
+bindkey "^Y" yank
+bindkey "^[b" backward-word
+bindkey "^[f" forward-word
+bindkey "^[d" kill-word
 
 # And now, for some exciting ones, if you've only used vi keys…
     bindkey "^[." insert-last-word # Alt+'.' gives !$'s value.
@@ -62,6 +67,8 @@ bindkey "^T" transpose-chars
     # duplicate the token to the left:
     bindkey "^[^_" copy-prev-word
 
+    bindkey "^[ " expand-history
+
 # Things that have more efficient bindings, but keeping for compatibility with
 # people used to them:
 bindkey "^X^B" vi-match-bracket # vi: %
@@ -99,7 +106,6 @@ bindkey "^XG" list-expand
 # TODO: Learn about emacs-like marks handling and enable these:
 #bindkey "^@" set-mark-command
 #bindkey "^X^X" exchange-point-and-mark
-#bindkey "^Y" yank
 #bindkey "^[\"" quote-region
 #bindkey "^[G" get-line # "Pop the top line off the buffer stack and
 #bindkey "^[w" copy-region-as-kill
@@ -118,12 +124,7 @@ bindkey "^XG" list-expand
 #bindkey "^[a" accept-and-hold
 #bindkey "^[c" capitalize-word
 #bindkey "^[g" get-line
-#bindkey "^[B" backward-word
 #bindkey "^[D" kill-word
-#bindkey "^[F" forward-word
-#bindkey "^[b" backward-word
-#bindkey "^[d" kill-word
-#bindkey "^[f" forward-word
 #bindkey "^[h" run-help
 #bindkey "^[A" accept-and-hold
 #bindkey "^[C" capitalize-word
@@ -140,9 +141,6 @@ bindkey "^XG" list-expand
 #bindkey "^[z" execute-last-named-cmd
 #bindkey "^[|" vi-goto-column
 #bindkey "^[^?" backward-kill-word
-
-# Why not just tab? Seems like a waste of a highly useful key: Alt+Space
-#?# bindkey "^[ " expand-history
 
 #-----------------------------------------
 # Docs for these widgets are kind of here:
