@@ -181,29 +181,29 @@ set bind-tty-special-chars off
 "\e_": yank-last-arg
 "\e\C-y": yank-nth-arg
 "\ey": yank-pop
-
 $if Ruby
     $if mode=vi
         set keymap vi-command
-        "[14~":   "Ils -l\n"        # <F4> (urxvt)
-        "OS":     "Ils -l\n"        # <F4> (xterm)
+        "[14~":   "Ils -l\n"        # <F4>
         "[15~":   "\C-lIwhereami\n" # <F5>
-        "[28~":   "Iedit -c\n"      # <Shift+F5> (urxvt)
+        "[28~":   "Iedit -c\n"      # <Shift+F5>
         "[17~":   "Iup\n"           # <F6>
         "[18~":   "Idown\n"         # <F7>
         "[19~":   "Icontinue\n"     # <F8>
-        "[32~":   "Itry-again\n"    # <Shift-F8> (urxvt)
-        "[19;2~": "Itry-again\n"    # <Shift-F8> (xterm, gnome-terminal)
+        "[32~":   "Itry-again\n"    # <Shift-F8>
         "[21~":   "Inext\n"         # <F10>
         "[23~":   "Istep\n"         # <F11>
-        "[23$":   "Ifinish\n"       # Shift+<F11> (urxvt)
-        "[23;2~": "Ifinish\n"       # Shift+<F11> (xterm, gnome-terminal)
-
+        "[23$":   "Ifinish\n"       # Shift+<F11>
+        # Cross-terminal compatibility:
+        "[19;2~": "Itry-again\n"    # <Shift-F8> (xterm/gnome-terminal)
+        "[23;2~": "Ifinish\n"       # Shift+<F11> (xterm/gnome-terminal)
+        "OS": "Ils -l\n"            # <F4>
         "OA": previous-history
         "[A": previous-history
         "OB": next-history
         "[B": next-history
     $else
+        # Emacs Bindings:
         "\e[14~":   "ls -l\n"
         "\eOS":     "ls -l\n"
         "\e[15~":   "\C-lwhereami\n"
