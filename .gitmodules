@@ -52,3 +52,6 @@
 [submodule ".vim/bundle/tabular"]
 	path = .vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular
+[submodule ".vim/bundle/ag"]
+	path = .vim/bundle/ag
+	url = https://github.com/rking/ag.vim
