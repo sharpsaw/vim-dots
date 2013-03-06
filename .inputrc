@@ -198,10 +198,10 @@ $if Ruby
         "[19;2~": "Itry-again\n"    # <Shift-F8> (xterm/gnome-terminal)
         "[23;2~": "Ifinish\n"       # Shift+<F11> (xterm/gnome-terminal)
         "OS": "Ils -l\n"            # <F4>
-        "OA": previous-history
-        "[A": previous-history
-        "OB": next-history
-        "[B": next-history
+        "OA": "kA"
+        "[A": "kA"
+        "OB": "jA"
+        "[B": "jA"
     $else
         # Emacs Bindings:
         "\e[14~":   "ls -l\n"
