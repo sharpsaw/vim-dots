@@ -1,2 +1,2 @@
 #!/bin/sh
-find . -name '.*.sw?' "$@"
+find . -name '.*.sw?' "$@" | perl -pe 's|\.([^/]+).sw.$/|$1 |'
