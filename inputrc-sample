@@ -1,3 +1,6 @@
+# A sample .inputrc file to change all of your command-line editing to VIM-style.
+# Not for everyone. Copy to ~/.inputrc to try it.
+
 set editing-mode vi
 
 set bind-tty-special-chars off
