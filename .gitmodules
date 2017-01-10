@@ -1,39 +1,39 @@
 [submodule ".vim/bundle/Recover.vim"]
 	path = .vim/bundle/Recover.vim
-	url = git://github.com/chrisbra/Recover.vim
+	url = https://github.com/chrisbra/Recover.vim
 [submodule ".vim/bundle/vim-textobj-underscore"]
 	path = .vim/bundle/vim-textobj-underscore
-	url = git://github.com/kana/vim-textobj-underscore
+	url = https://github.com/kana/vim-textobj-underscore
 [submodule ".vim/bundle/vim-coffee-script"]
 	path = .vim/bundle/vim-coffee-script
-	url = git://github.com/kchmck/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script
 [submodule ".vim/bundle/ctrlp.vim"]
 	path = .vim/bundle/ctrlp.vim
-	url = git://github.com/kien/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim
 [submodule ".vim/bundle/vim-detailed"]
 	path = .vim/bundle/vim-detailed
-	url = git://github.com/rking/vim-detailed
+	url = https://github.com/rking/vim-detailed
 [submodule ".vim/bundle/ack.vim"]
 	path = .vim/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim
 [submodule ".vim/bundle/vim-bad-whitespace"]
 	path = .vim/bundle/vim-bad-whitespace
-	url = git://github.com/bitc/vim-bad-whitespace
+	url = https://github.com/bitc/vim-bad-whitespace
 [submodule ".vim/bundle/vim-textobj-diff"]
 	path = .vim/bundle/vim-textobj-diff
-	url = git://github.com/kana/vim-textobj-diff
+	url = https://github.com/kana/vim-textobj-diff
 [submodule ".vim/bundle/vim-textobj-entire"]
 	path = .vim/bundle/vim-textobj-entire
-	url = git://github.com/kana/vim-textobj-entire
+	url = https://github.com/kana/vim-textobj-entire
 [submodule ".vim/bundle/vim-textobj-indent"]
 	path = .vim/bundle/vim-textobj-indent
-	url = git://github.com/kana/vim-textobj-indent
+	url = https://github.com/kana/vim-textobj-indent
 [submodule ".vim/bundle/vim-textobj-lastpat"]
 	path = .vim/bundle/vim-textobj-lastpat
-	url = git://github.com/kana/vim-textobj-lastpat
+	url = https://github.com/kana/vim-textobj-lastpat
 [submodule ".vim/bundle/vim-textobj-user"]
 	path = .vim/bundle/vim-textobj-user
-	url = git://github.com/kana/vim-textobj-user
+	url = https://github.com/kana/vim-textobj-user
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
@@ -54,4 +54,4 @@
 	url = https://github.com/rking/ag.vim
 [submodule ".vim/bundle/vim-ls"]
 	path = .vim/bundle/vim-ls
-	url = git://github.com/gkz/vim-ls
+	url = https://github.com/gkz/vim-ls
