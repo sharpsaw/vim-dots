@@ -9,7 +9,7 @@
 	url = https://github.com/kchmck/vim-coffee-script
 [submodule ".vim/bundle/ctrlp.vim"]
 	path = .vim/bundle/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim
 [submodule ".vim/bundle/vim-detailed"]
 	path = .vim/bundle/vim-detailed
 	url = https://github.com/rking/vim-detailed
